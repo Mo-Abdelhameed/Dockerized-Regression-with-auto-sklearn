@@ -1,6 +1,6 @@
 {
   "seed_value": 123,
-  "task__time": 300,
+  "task_time": 300,
   "model_time": 30,
   "include": {
     "regressor": [
