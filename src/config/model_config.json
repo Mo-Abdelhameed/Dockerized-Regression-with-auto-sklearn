@@ -1,10 +1,14 @@
 {
   "seed_value": 123,
-  "task_time": 30,
-  "model_time": 30,
+  "task_time": 900,
+  "model_time": 180,
   "include": {
     "regressor": [
-      "random_forest"
+      "random_forest",
+      "extra_trees",
+      "gradient_boosting",
+      "k_nearest_neighbors",
+      "sgd"
     ]
   }
 }
