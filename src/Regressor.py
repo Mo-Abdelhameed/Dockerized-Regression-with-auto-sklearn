@@ -65,7 +65,7 @@ class Regressor:
         self.model_config = read_json_as_dict(paths.MODEL_CONFIG_FILE_PATH)
         self.automl = AutoSklearnRegressor(
             time_left_for_this_task=self.model_config["task_time"],
-            per_run_time_limit=["model_time"],
+            per_run_time_limit=self.model_config["model_time"],
             metric=mean_squared_error,
             include=self.model_config["include"],
             seed=self.model_config["seed_value"],
@@ -81,6 +81,7 @@ class Regressor:
 
     def train(self) -> None:
         """Train the model on the provided data"""
+        print()
         self.automl.fit(self.x, self.y)
         self._is_trained = True
 
