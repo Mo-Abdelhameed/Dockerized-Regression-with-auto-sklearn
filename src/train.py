@@ -43,6 +43,7 @@ def run_training(
             os.makedirs(predictor_dir_path)
         regressor.save(predictor_dir_path)
         logger.info("Model saved!")
+        print(regressor.automl.leaderboard())
 
     except Exception as exc:
         err_msg = "Error occurred during training."

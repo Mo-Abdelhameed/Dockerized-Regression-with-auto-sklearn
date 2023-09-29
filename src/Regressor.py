@@ -1,13 +1,13 @@
 import os
 import re
 import warnings
-from typing import List
-
 import pandas as pd
+from typing import List
 from autosklearn.regression import AutoSklearnRegressor
+from autosklearn.metrics import mean_squared_error
 from joblib import dump, load
 from sklearn.exceptions import NotFittedError
-
+from utils import read_json_as_dict
 from config import paths
 from schema.data_schema import RegressionSchema
 
@@ -62,9 +62,13 @@ class Regressor:
     def __init__(self, train_input: pd.DataFrame, schema: RegressionSchema):
         """Construct a New Regressor."""
         self._is_trained: bool = False
+        self.model_config = read_json_as_dict(paths.MODEL_CONFIG_FILE_PATH)
         self.automl = AutoSklearnRegressor(
-            time_left_for_this_task=60, 
-
+            time_left_for_this_task=self.model_config["task_time"],
+            per_run_time_limit=["model_time"],
+            metric=mean_squared_error,
+            include=self.model_config["include"],
+            seed=self.model_config["seed_value"],
         )
         self.train_input = train_input
         self.schema = schema
