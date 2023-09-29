@@ -1,7 +1,7 @@
 {
   "seed_value": 123,
-  "task_time": 900,
-  "model_time": 180,
+  "task_time": 450,
+  "model_time": 90,
   "include": {
     "regressor": [
       "random_forest",

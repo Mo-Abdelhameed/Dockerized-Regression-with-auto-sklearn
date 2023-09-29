@@ -1,10 +1,10 @@
 import pandas as pd
-
 from config import paths
 from logger import get_logger
 from Regressor import Regressor, predict_with_model
 from schema.data_schema import load_saved_schema
 from utils import read_csv_in_directory, save_dataframe_as_csv
+from preprocessing.pipeline import run_pipeline
 
 logger = get_logger(task_name="predict")
 
@@ -29,8 +29,8 @@ def run_batch_predictions(
     data_schema = load_saved_schema(saved_schema_dir)
     ids = x_test[data_schema.id]
     x_test = x_test.drop(columns=[data_schema.id])
+    x_test = run_pipeline(x_test, data_schema, training=False)
     model = Regressor.load(predictor_dir)
-
     logger.info("Making predictions...")
     predictions_df = predict_with_model(model, x_test)
     predictions_df = pd.DataFrame({data_schema.id: ids, "prediction": predictions_df})
