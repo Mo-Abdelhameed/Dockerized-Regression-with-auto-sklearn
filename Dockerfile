@@ -11,7 +11,7 @@ FROM mfeurer/auto-sklearn:master
 
 COPY ./requirements/requirements.txt /opt/
 RUN pip3 install --no-cache-dir -r /opt/requirements.txt
-COPY src ./opt/src
+COPY src /opt/src
 COPY ./entry_point.sh /opt/
 RUN chmod +x /opt/entry_point.sh
 
