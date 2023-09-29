@@ -24,5 +24,5 @@ ENV PYTHONDONTWRITEBYTECODE=TRUE
 ENV PATH="/opt/src:${PATH}"
 # set non-root user
 
-#ENTRYPOINT ["/opt/entry_point.sh"]
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/opt/entry_point.sh"]
+# ENTRYPOINT ["/bin/bash"]

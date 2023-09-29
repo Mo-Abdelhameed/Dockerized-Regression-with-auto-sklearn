@@ -53,7 +53,7 @@ def clean_and_ensure_unique(names: List[str]) -> List[str]:
 
 
 class Regressor:
-    """A wrapper class for the AutoGluon Regressor.
+    """A wrapper class for the auto-sklearn Regressor.
 
     This class provides a consistent interface that can be used with other
     regressor models.
@@ -63,7 +63,7 @@ class Regressor:
         """Construct a New Regressor."""
         self._is_trained: bool = False
         self.automl = AutoSklearnRegressor(
-            time_left_for_this_task=60*4, 
+            time_left_for_this_task=60, 
 
         )
         self.train_input = train_input
