@@ -9,6 +9,9 @@
       "gradient_boosting",
       "k_nearest_neighbors",
       "sgd"
+    ],
+    "feature_preprocessor": [
+      "no_preprocessing"
     ]
   }
 }

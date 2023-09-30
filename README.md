@@ -15,7 +15,7 @@ The following are the requirements for using your data with this model:
 
 Here are the highlights of this implementation: <br/>
 
-- A flexible preprocessing pipeline built using **auto-sklearn**. Transformations include missing value imputation, categorical encoding, outlier removal and feature scaling. <br/>
+- A flexible preprocessing pipeline built using **Pandas** and **feature-engine**. Transformations include missing value imputation, categorical encoding and feature scaling. <br/>
 - **FASTAPI** inference service for online inferences.
   Additionally, the implementation contains the following features:
 - **Data Validation**: Pydantic data validation is used for the schema, training and test files, as well as the inference request data.
@@ -69,6 +69,13 @@ In this section we cover the following:
 - If you plan to run this model implementation on your own regression dataset, you will need your training and testing data in a CSV format. Also, you will need to create a schema file as per the Ready Tensor specifications. The schema is in JSON format, and it's easy to create. You can use the example schema file provided in the `examples` directory as a template.
 
 ### To run locally (without Docker)
+
+auto-sklearn does not support Windows and macOS. Alternatively you can run the regressor through docker.
+- System requirements:
+ - Linux operating system (for example Ubuntu)
+ - Python (>=3.7) (get Python here),
+ - C++ compiler (with C++11 supports) (get GCC here).
+
 
 - Create your virtual environment and install dependencies listed in `requirements.txt` which is inside the `requirements` directory.
 - Move the three example files (`titanic_schema.json`, `titanic_train.csv` and `titanic_test.csv`) in the `examples` directory into the `./model_inputs_outputs/inputs/schema`, `./model_inputs_outputs/inputs/data/training` and `./model_inputs_outputs/inputs/data/testing` folders, respectively (or alternatively, place your custom dataset files in the same locations).
@@ -137,6 +144,50 @@ The key `instances` contains a list of objects, each of which is a sample for wh
   ]
 }
 ```
+
+### Configuration File
+This configuration file is used to specify parameters and settings for the model training process.
+
+```json
+{
+  "seed_value": 123,
+  "task_time": 450,
+  "model_time": 90,
+  "include": {
+    "regressor": [
+      "random_forest",
+      "extra_trees",
+      "gradient_boosting",
+      "k_nearest_neighbors",
+      "sgd"
+    ],
+    "feature_preprocessor": ["no_preprocessing"]
+  }
+}
+```
+
+Fields:
+- seed_value: (Integer) The seed used for random number generation to ensure reproducibility. Default is 123.
+
+- task_time: (Integer) Time limit in seconds for the search of appropriate models. By increasing this value, auto-sklearn has a higher chance of finding better models.
+
+- model_time: (Integer) Time limit for a single call to the machine learning model. Model fitting will be terminated if the machine learning algorithm runs over the time limit. Set this value high enough so that typical machine learning algorithms can be fit on the training data.
+
+- include: (dict(list)) The algorithms/preprocessors used in the searching process. Not setting this variable, includes all possiable algorithms.
+Possiable algorithms include:
+  - adaboost
+  - ard_regression
+  - decision_tree
+  - extra_trees
+  - gaussian_process
+  - gradient_boosting
+  - k_nearest_neighbors
+  - liblinear_svr
+  - libsvm_svr
+  - mlp
+  - random_forest
+  - sgd
+The names of the possiable preprocessors are available at (autosklearn.pipeline.components.feature_preprocessing._preprocessors.keys())
 
 #### OpenAPI
 

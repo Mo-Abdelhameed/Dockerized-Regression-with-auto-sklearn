@@ -1,6 +1,6 @@
-# import autosklearn.pipeline.components.regression
-# regressors = autosklearn.pipeline.components.regression._regressors.keys()
-# print(list(regressors))
+import autosklearn.pipeline.components.regression
+regressors = autosklearn.pipeline.components.regression._regressors.keys()
+print(list(regressors))
 
 
 # import autosklearn.pipeline.components.feature_preprocessing
@@ -22,8 +22,3 @@
 #     ]
 #   }
 # }
-
-import pandas as pd
-x = pd.read_csv('/workspaces/Dockerized-Regression-with-auto-sklearn/model_inputs_outputs/inputs/data/training/abalone_train.csv')
-
-print(x.describe())
