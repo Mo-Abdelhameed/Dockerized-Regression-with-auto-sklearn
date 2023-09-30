@@ -72,9 +72,9 @@ In this section we cover the following:
 
 auto-sklearn does not support Windows and macOS. Alternatively you can run the regressor through docker.
 - System requirements:
- - Linux operating system (for example Ubuntu)
- - Python (>=3.7) (get Python here),
- - C++ compiler (with C++11 supports) (get GCC here).
+  - Linux operating system (for example Ubuntu)
+  - Python (>=3.7) (get Python here),
+  - C++ compiler (with C++11 supports) (get GCC here).
 - Create your virtual environment and install dependencies listed in `requirements.txt` which is inside the `requirements` directory.
 - Move the three example files (`titanic_schema.json`, `titanic_train.csv` and `titanic_test.csv`) in the `examples` directory into the `./model_inputs_outputs/inputs/schema`, `./model_inputs_outputs/inputs/data/training` and `./model_inputs_outputs/inputs/data/testing` folders, respectively (or alternatively, place your custom dataset files in the same locations).
 - Run the script `src/train.py` to train the regression model. This will save the model artifacts, including the preprocessing pipeline and label encoder, in the path `./model_inputs_outputs/model/artifacts/`.
@@ -166,6 +166,7 @@ This configuration file is used to specify parameters and settings for the model
 
 Fields:
 - seed_value: (Integer) The seed used for random number generation to ensure reproducibility. Default is 123.
+- prediction_field_name: (String) The name of the field/column in the output data where the model's predictions will be stored. Default is "prediction".
 - task_time: (Integer) Time limit in seconds for the search of appropriate models. By increasing this value, auto-sklearn has a higher chance of finding better models.
 - model_time: (Integer) Time limit for a single call to the machine learning model. Model fitting will be terminated if the machine learning algorithm runs over the time limit. Set this value high enough so that typical machine learning algorithms can be fit on the training data.
 - include: (dict(list)) The algorithms/preprocessors used in the searching process. Not setting this variable, includes all possiable algorithms.
