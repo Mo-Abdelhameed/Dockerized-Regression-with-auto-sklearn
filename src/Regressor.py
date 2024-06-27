@@ -68,6 +68,7 @@ class Regressor:
             per_run_time_limit=self.model_config["model_time"],
             metric=mean_squared_error,
             include=self.model_config["include"],
+            initial_configurations_via_metalearning=0,
             seed=self.model_config["seed_value"],
         )
         self.train_input = train_input
